@@ -46,11 +46,11 @@ export default function About() {
               <div className="about-stats glass">
                 <div className="stat">
                   <span className="stat-num">{age}</span>
-                  <span className="stat-label">Years Old</span>
+                  <span className="stat-label"><b>Years Old</b></span>
                 </div>
                 <div className="stat">
                   <span className="stat-num">40+</span>
-                  <span className="stat-label">Projects</span>
+                  <span className="stat-label"><b>Projects</b></span>
                 </div>
               </div>
             </div>

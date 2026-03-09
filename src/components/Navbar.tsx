@@ -23,6 +23,8 @@ export default function Navbar() {
   const [mobileNav, setMobileNav] = useState(false);
   const [active, setActive]       = useState('');
   const dropdownRef               = useRef<HTMLDivElement>(null);
+  const linksRef                  = useRef<HTMLUListElement>(null);
+  const [underline, setUnderline] = useState({ left: 0, width: 0 });
 
   useEffect(() => {
     const onScroll = () => {
@@ -35,6 +37,22 @@ export default function Navbar() {
     window.addEventListener('scroll', onScroll);
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
+
+  useEffect(() => {
+    function updateUnderline() {
+      if (!linksRef.current) return;
+      const activeEl = linksRef.current.querySelector(`a[href="#${active || 'hero'}"]`) as HTMLElement | null;
+      if (activeEl) {
+        const ul = linksRef.current.getBoundingClientRect();
+        const a = activeEl.getBoundingClientRect();
+        setUnderline({ left: a.left - ul.left, width: a.width });
+      }
+    }
+
+    updateUnderline();
+    window.addEventListener('resize', updateUnderline);
+    return () => window.removeEventListener('resize', updateUnderline);
+  }, [active]);
 
   useEffect(() => {
     const handler = (e: MouseEvent) => {
@@ -87,7 +105,7 @@ export default function Navbar() {
       )}
 
       {/* Nav links */}
-      <ul className={`nav-links${mobileNav ? ' mobile-open' : ''}`}>
+      <ul ref={linksRef} className={`nav-links${mobileNav ? ' mobile-open' : ''}`}>
         {NAV_LINKS.map(link => {
           const id = link.href.replace('#', '');
           const isActive = active === id || (active === '' && id === 'hero');
@@ -103,6 +121,10 @@ export default function Navbar() {
             </li>
           );
         })}
+        <span
+          className="nav-underline"
+          style={{ left: underline.left, width: underline.width }}
+        />
       </ul>
 
       {/* Mobile nav toggle */}

@@ -125,7 +125,7 @@ strong { color: var(--text); }
   text-decoration: none;
 }
 
-.nav-links { display: flex; list-style: none; gap: 2rem; }
+.nav-links { display: flex; list-style: none; gap: 2rem; position: relative; }
 
 .nav-links a {
   text-decoration: none;
@@ -140,14 +140,15 @@ strong { color: var(--text); }
 
 .nav-links a.active { color: var(--accent); }
 
-.nav-links a.active::after {
-  content: '';
+.nav-underline {
   position: absolute;
-  bottom: -4px; left: 0; right: 0;
+  bottom: -4px;
   height: 2px;
   background: linear-gradient(90deg, var(--accent), var(--accent2));
   border-radius: 2px;
   box-shadow: 0 0 8px var(--glow);
+  transition: left 0.3s ease, width 0.3s ease;
+  pointer-events: none;
 }
 
 .nav-contact {
@@ -415,7 +416,7 @@ body.nav-locked {
 
 .stat-label {
   display: block;
-  font-size: 0.75rem;
+  font-size: 1.125rem;
   color: var(--text-muted);
   margin-top: 0.2rem;
 }
