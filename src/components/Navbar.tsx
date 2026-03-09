@@ -22,6 +22,7 @@ export default function Navbar() {
   const [open, setOpen]           = useState(false);
   const [mobileNav, setMobileNav] = useState(false);
   const [active, setActive]       = useState('');
+  const [scrollProgress, setScrollProgress] = useState(0);
   const dropdownRef               = useRef<HTMLDivElement>(null);
   const linksRef                  = useRef<HTMLUListElement>(null);
   const [underline, setUnderline] = useState({ left: 0, width: 0 });
@@ -29,11 +30,15 @@ export default function Navbar() {
   useEffect(() => {
     const onScroll = () => {
       setScrolled(window.scrollY > 50);
+      const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = scrollHeight > 0 ? Math.min(window.scrollY / scrollHeight, 1) : 0;
+      setScrollProgress(progress);
       const sections = document.querySelectorAll<HTMLElement>('section[id]');
       let current = '';
       sections.forEach(sec => { if (window.scrollY >= sec.offsetTop - 120) current = sec.id; });
       setActive(current);
     };
+    onScroll();
     window.addEventListener('scroll', onScroll);
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
@@ -75,6 +80,7 @@ export default function Navbar() {
 
   return (
     <nav id="navbar" className={scrolled ? 'scrolled' : ''}>
+      <span className="nav-scroll-progress" style={{ transform: `scaleX(${scrollProgress})` }} />
       {/* Hamburger / Contact Me */}
       <div className="nav-menu" ref={dropdownRef}>
         <button

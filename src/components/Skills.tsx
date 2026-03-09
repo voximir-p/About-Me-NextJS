@@ -65,6 +65,14 @@ export default function Skills() {
                   role="img"
                   aria-label={skill.lang}
                   style={{ animationDelay: `${i * 0.12}s` }}
+                  onPointerMove={(e) => {
+                    const el = e.currentTarget;
+                    const rect = el.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    el.style.setProperty('--sx', `${x}px`);
+                    el.style.setProperty('--sy', `${y}px`);
+                  }}
                   onPointerEnter={() => {
                     if (!isTouchRef.current) setHighlight(skill.lang);
                   }}

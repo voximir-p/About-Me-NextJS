@@ -9,6 +9,8 @@ interface Particle {
   size: number;
   alpha: number;
   color: string;
+  driftAngle: number;
+  driftSpeed: number;
 }
 
 export default function Particles() {
@@ -28,17 +30,21 @@ export default function Particles() {
 
     const colors = ['rgba(0,247,255,', 'rgba(124,58,237,', 'rgba(244,114,182,'];
     const COUNT = 60;
+    const SPEED_SCALE = 0.02; // 50x slower motion
+    const MOUSE_REACT_SCALE = 4; // 4x stronger cursor reaction
     const particles: Particle[] = [];
 
     for (let i = 0; i < COUNT; i++) {
       particles.push({
         x: Math.random() * w,
         y: Math.random() * h,
-        vx: (Math.random() - 0.5) * 0.4,
-        vy: (Math.random() - 0.5) * 0.4,
+        vx: (Math.random() - 0.5) * 0.06 * SPEED_SCALE,
+        vy: (Math.random() - 0.5) * 0.06 * SPEED_SCALE,
         size: Math.random() * 2 + 0.5,
         alpha: Math.random() * 0.5 + 0.1,
         color: colors[Math.floor(Math.random() * colors.length)],
+        driftAngle: Math.random() * Math.PI * 2,
+        driftSpeed: (Math.random() * 0.012 + 0.004) * SPEED_SCALE,
       });
     }
 
@@ -62,6 +68,11 @@ export default function Particles() {
       const scrollY = window.scrollY;
 
       for (const p of particles) {
+        // Very slow, random wandering drift.
+        p.driftAngle += (Math.random() - 0.5) * 0.02;
+        p.vx += Math.cos(p.driftAngle) * p.driftSpeed;
+        p.vy += Math.sin(p.driftAngle) * p.driftSpeed;
+
         p.x += p.vx;
         p.y += p.vy;
 
@@ -76,13 +87,14 @@ export default function Particles() {
         const dist = Math.sqrt(dx * dx + dy * dy);
         if (dist < 120) {
           const force = (120 - dist) / 120;
-          p.vx += (dx / dist) * force * 0.3;
-          p.vy += (dy / dist) * force * 0.3;
+          const safeDist = Math.max(dist, 0.001);
+          p.vx += (dx / safeDist) * force * 0.14 * SPEED_SCALE * MOUSE_REACT_SCALE;
+          p.vy += (dy / safeDist) * force * 0.14 * SPEED_SCALE * MOUSE_REACT_SCALE;
         }
 
         // Damping
-        p.vx *= 0.98;
-        p.vy *= 0.98;
+        p.vx *= 0.993;
+        p.vy *= 0.993;
 
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);

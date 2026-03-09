@@ -2,7 +2,6 @@
 import { useEffect, useRef, useState } from 'react';
 
 export default function MouseGlow() {
-  const glowRef = useRef<HTMLDivElement>(null);
   const trailRef = useRef<HTMLDivElement>(null);
   const pos = useRef({ x: 0, y: 0 });
   const trailPos = useRef({ x: 0, y: 0 });
@@ -30,11 +29,7 @@ export default function MouseGlow() {
 
     let raf: number;
     const animate = () => {
-      const glow = glowRef.current;
       const trail = trailRef.current;
-      if (glow) {
-        glow.style.transform = `translate(${pos.current.x}px, ${pos.current.y}px)`;
-      }
       if (trail) {
         trailPos.current.x += (pos.current.x - trailPos.current.x) * 0.08;
         trailPos.current.y += (pos.current.y - trailPos.current.y) * 0.08;
@@ -55,7 +50,6 @@ export default function MouseGlow() {
   return (
     <>
       <div ref={trailRef} className="mouse-trail" />
-      <div ref={glowRef} className="mouse-glow" />
     </>
   );
 }

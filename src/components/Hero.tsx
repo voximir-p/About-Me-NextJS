@@ -99,8 +99,17 @@ export default function Hero() {
   useEffect(() => {
     const hero = heroRef.current;
     if (!hero) return;
+
+    hero.style.setProperty("--hx", "50%");
+    hero.style.setProperty("--hy", "40%");
+
     const onMove = (e: MouseEvent) => {
       const rect = hero.getBoundingClientRect();
+      const px = ((e.clientX - rect.left) / rect.width) * 100;
+      const py = ((e.clientY - rect.top) / rect.height) * 100;
+      hero.style.setProperty("--hx", `${px}%`);
+      hero.style.setProperty("--hy", `${py}%`);
+
       mouse.current = {
         x: (e.clientX - rect.left) / rect.width - 0.5,
         y: (e.clientY - rect.top) / rect.height - 0.5,
@@ -125,6 +134,7 @@ export default function Hero() {
   return (
     <section id="hero" ref={heroRef}>
       <div className="hero-bg">
+        <div className="hero-spotlight" />
         <div className="orb orb-1" />
         <div className="orb orb-2" />
         <div className="orb orb-3" />
