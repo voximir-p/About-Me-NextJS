@@ -28,9 +28,8 @@ export default function Hero() {
   /* PowerGlitch on name */
   useEffect(() => {
     if (!glitchRef.current) return;
-    const { stopGlitch } = PowerGlitch.glitch(glitchRef.current,
-    {
-      playMode: 'hover',
+    const { stopGlitch } = PowerGlitch.glitch(glitchRef.current, {
+      playMode: "hover",
       createContainers: true,
       hideOverflow: false,
       timing: { duration: 600, iterations: 1, easing: "ease-in-out" },
@@ -43,8 +42,7 @@ export default function Hero() {
         maxHeight: 0.05,
         hueRotate: true,
       },
-    }
-  );
+    });
     return () => stopGlitch();
   }, []);
 
@@ -107,17 +105,21 @@ export default function Hero() {
         x: (e.clientX - rect.left) / rect.width - 0.5,
         y: (e.clientY - rect.top) / rect.height - 0.5,
       };
-      const orb1 = hero.querySelector('.orb-1') as HTMLElement | null;
-      const orb2 = hero.querySelector('.orb-2') as HTMLElement | null;
-      const ring1 = hero.querySelector('.ring-1') as HTMLElement | null;
-      const ring2 = hero.querySelector('.ring-2') as HTMLElement | null;
-      if (orb1) orb1.style.translate = `${mouse.current.x * 40}px ${mouse.current.y * 40}px`;
-      if (orb2) orb2.style.translate = `${mouse.current.x * -30}px ${mouse.current.y * -30}px`;
-      if (ring1) ring1.style.translate = `${mouse.current.x * 15}px ${mouse.current.y * 15}px`;
-      if (ring2) ring2.style.translate = `${mouse.current.x * -10}px ${mouse.current.y * -10}px`;
+      const orb1 = hero.querySelector(".orb-1") as HTMLElement | null;
+      const orb2 = hero.querySelector(".orb-2") as HTMLElement | null;
+      const ring1 = hero.querySelector(".ring-1") as HTMLElement | null;
+      const ring2 = hero.querySelector(".ring-2") as HTMLElement | null;
+      if (orb1)
+        orb1.style.translate = `${mouse.current.x * 40}px ${mouse.current.y * 40}px`;
+      if (orb2)
+        orb2.style.translate = `${mouse.current.x * -30}px ${mouse.current.y * -30}px`;
+      if (ring1)
+        ring1.style.translate = `${mouse.current.x * 15}px ${mouse.current.y * 15}px`;
+      if (ring2)
+        ring2.style.translate = `${mouse.current.x * -10}px ${mouse.current.y * -10}px`;
     };
-    hero.addEventListener('mousemove', onMove);
-    return () => hero.removeEventListener('mousemove', onMove);
+    hero.addEventListener("mousemove", onMove);
+    return () => hero.removeEventListener("mousemove", onMove);
   }, []);
 
   return (
@@ -154,13 +156,23 @@ export default function Hero() {
             className="btn btn-primary btn-shimmer"
             onClick={(e) => {
               e.preventDefault();
-              document
-                .getElementById("projects")
-                ?.scrollIntoView({ behavior: "smooth" });
+              const btn = (e.currentTarget as HTMLElement);
+              btn.classList.remove('btn-clicked');
+              void btn.offsetWidth;
+              btn.classList.add('btn-clicked');
+              btn.addEventListener('animationend', () => {
+                btn.classList.remove('btn-clicked');
+              }, { once: true });
+              setTimeout(() => {
+                document
+                  .getElementById("projects")
+                  ?.scrollIntoView({ behavior: "smooth" });
+              }, 300);
             }}
           >
             <span className="btn-text">View My Work</span>
             <span className="btn-glow" />
+            <span className="btn-ripple" />
           </MagneticButton>
         </div>
       </div>

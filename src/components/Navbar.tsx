@@ -75,15 +75,15 @@ export default function Navbar() {
 
   return (
     <nav id="navbar" className={scrolled ? 'scrolled' : ''}>
-      {/* Hamburger / Contacts */}
+      {/* Hamburger / Contact Me */}
       <div className="nav-menu" ref={dropdownRef}>
         <button
           type="button"
           className={`nav-contact${open ? ' active' : ''}`}
           onClick={(e) => { e.stopPropagation(); setOpen(o => !o); }}
-          aria-label="Menu"
+          aria-label="Menu"Hee tung tung
         >
-          <span className="nav-contact-text">Contacts</span>
+          <span className="nav-contact-text">Contact Me</span>
           <span className="nav-contact-ripple" />
         </button>
         <div className={`nav-dropdown${open ? ' open' : ''}`}>
