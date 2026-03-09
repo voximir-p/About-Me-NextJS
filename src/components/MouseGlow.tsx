@@ -1,13 +1,28 @@
 'use client';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 export default function MouseGlow() {
   const glowRef = useRef<HTMLDivElement>(null);
   const trailRef = useRef<HTMLDivElement>(null);
   const pos = useRef({ x: 0, y: 0 });
   const trailPos = useRef({ x: 0, y: 0 });
+  const [enabled, setEnabled] = useState(false);
 
   useEffect(() => {
+    const media = window.matchMedia('(hover: none), (pointer: coarse)');
+    const updateEnabled = () => {
+      const touchCapable = media.matches || navigator.maxTouchPoints > 0;
+      setEnabled(!touchCapable);
+    };
+
+    updateEnabled();
+    media.addEventListener('change', updateEnabled);
+    return () => media.removeEventListener('change', updateEnabled);
+  }, []);
+
+  useEffect(() => {
+    if (!enabled) return;
+
     const onMove = (e: MouseEvent) => {
       pos.current = { x: e.clientX, y: e.clientY };
     };
@@ -33,7 +48,9 @@ export default function MouseGlow() {
       window.removeEventListener('mousemove', onMove);
       cancelAnimationFrame(raf);
     };
-  }, []);
+  }, [enabled]);
+
+  if (!enabled) return null;
 
   return (
     <>

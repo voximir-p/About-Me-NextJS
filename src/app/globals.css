@@ -207,6 +207,13 @@ strong { color: var(--text); }
   filter: blur(1px);
 }
 
+@media (hover: none), (pointer: coarse) {
+  .mouse-glow,
+  .mouse-trail {
+    display: none;
+  }
+}
+
 /* Particles canvas */
 .particles-canvas {
   position: fixed;
