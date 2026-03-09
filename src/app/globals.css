@@ -1186,6 +1186,7 @@ footer p { color: var(--text-muted); font-size: 0.9rem; }
   .mouse-glow, .mouse-trail { display: none; }
   .particles-canvas { opacity: 0.3; }
   .hero-grid-lines { display: none; }
+  .about-br { display: none; }
   .container { padding: 0 1.2rem; }
 
   /* Navbar */
@@ -1281,7 +1282,7 @@ footer p { color: var(--text-muted); font-size: 0.9rem; }
 
   /* About */
   .avatar-wrapper { width: 130px; height: 130px; }
-  .about-stats { padding: 1rem 0.8rem; gap: 1rem; flex-wrap: wrap; justify-content: center; }
+  .about-stats { padding: 1.2rem 1.6rem; gap: 1rem; flex-wrap: wrap; justify-content: center; }
   .stat-num { font-size: 1.3rem; }
   .about-text p { font-size: 0.92rem; margin: 1.25rem; }
   .about-tags { gap: 0.4rem; }

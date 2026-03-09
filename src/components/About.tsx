@@ -6,7 +6,7 @@ import RevealWrapper from './RevealWrapper';
 const BIRTHDAY   = new Date('2010-09-06T00:00:00');
 const MS_PER_YEAR = 1000 * 60 * 60 * 24 * 365.25;
 
-const TAGS = ['Open Source', 'Problem Solver', 'Critical Thinker'];
+const TAGS = ['Open Source', 'Problem Solver', 'Critical Thinker', 'Fast Learner'];
 
 export default function About() {
   const [age, setAge] = useState('15.00');
@@ -97,11 +97,13 @@ export default function About() {
                 understanding how systems work and turning ideas into working code. What started as curiosity
                 about programming quickly became something I genuinely enjoy spending time on.
               </p>
+              <br className="about-br" />
               <p>
                 I focus on <strong>problem-solving and programming fundamentals</strong>, often working with C++
                 and experimenting with algorithms and data structures while aiming to write clean, logical, and
                 efficient code.
               </p>
+              <br className="about-br" />
               <p>
                 Outside of coding, I spend time learning about computer architectures, figuring out how things
                 work, refining my workflow, and occasionally relaxing with games and other small interests.
