@@ -12,6 +12,8 @@ interface Project {
   featured?: boolean;
 }
 
+const GITHUB_PROFILE_URL = 'https://www.github.com/voximir-p';
+
 const PROJECTS: Project[] = [
   {
     tag: 'Featured', featured: true,
@@ -137,6 +139,23 @@ export default function Projects() {
               <ProjectCard project={p} />
             </RevealWrapper>
           ))}
+
+          <RevealWrapper
+            key="more-projects"
+            delay={PROJECTS.length * 0.1}
+            className="more-projects-item"
+          >
+            <a
+              href={GITHUB_PROFILE_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="project-card glass more-projects-card"
+              aria-label="View more projects on GitHub"
+            >
+              <span className="more-projects-title">Looking for more projects?</span>
+              <span className="more-projects-subtitle">Open my GitHub profile</span>
+            </a>
+          </RevealWrapper>
         </div>
       </div>
     </section>
