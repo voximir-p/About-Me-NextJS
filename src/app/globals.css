@@ -1438,7 +1438,7 @@ footer p { color: var(--text-muted); font-size: 0.9rem; }
   .ring-1 { width: 260px; height: 260px; margin: -130px 0 0 -130px; }
   .ring-2 { width: 400px; height: 400px; margin: -200px 0 0 -200px; }
   .hero-content { padding: 0 1rem; }
-  .hero-actions { flex-direction: column; align-items: center; }
+  .hero-actions { flex-direction: row; align-items: stretch; justify-content: center; gap: 0.75rem; }
   .hero-desc { font-size: 0.95rem; }
 
   /* About */
@@ -1477,7 +1477,7 @@ footer p { color: var(--text-muted); font-size: 0.9rem; }
   .container { padding: 0 1.2rem; }
 
   /* Navbar */
-  .nav-contact { padding: 0.4rem 0.9rem; font-size: 0.8rem; }
+  .nav-contact { padding: 0.65rem 1.4rem; font-size: 0.9rem; }
   .nav-dropdown a { width: 36px; height: 36px; }
   .nav-dropdown a img { width: 18px; height: 18px; }
 

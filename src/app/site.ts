@@ -1,6 +1,6 @@
 export const siteConfig = {
   name: 'Voximir',
-  title: 'Voximir | Developer Portfolio',
+  title: 'Voximir',
   description:
     'Personal portfolio of Voximir, a developer building open-source tools, clean interfaces, and practical software projects.',
   url: (process.env.NEXT_PUBLIC_SITE_URL || 'https://www.voximir.org').replace(/\/$/, ''),
